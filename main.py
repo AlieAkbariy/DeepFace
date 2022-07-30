@@ -4,7 +4,7 @@ import numpy as np
 
 
 cap = cv2.VideoCapture(0)
-
+cap.set(cv2.CAP_PROP_FPS, 15) 
 while True:
     ret, frame = cap.read() # read frame from webcam
     # run deep face function for analyze
@@ -19,6 +19,7 @@ while True:
     age = str(age)
     gender = str(gender)
     race = str(race)
+    res =str(age +' ' + gender+ ' ' + race)
 
     # read image
     if emo == 'angry':  
@@ -49,6 +50,9 @@ while True:
     # Set an index of where the mask is
     roi[np.where(mask)] = 0
     roi += logo
+
+    # show information of age, gender, race
+    cv2.putText(frame, res, (50, 50), cv2.FONT_HERSHEY_COMPLEX, 1.0, (0, 0, 0), 2)
  
     cv2.imshow('WebCam', frame)
 
